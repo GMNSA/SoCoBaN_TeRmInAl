@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include "socoban_game.h"
 
 int main(void)
 {
-	puts("OK\n");
+	game();
 	return 0;
 }

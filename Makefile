@@ -1,27 +1,28 @@
 CC=gcc
-LDFLAGS=-c -g -std=c11 -Wall -Wextra -Werror
+CFLAGS=-c -g -std=gnu11 -Wall -Wextra -Werror
 EXECUTABLE=a.out
-SOURCES=srcs/main.c
+SOURCES=srcs/main.c srcs/socoban_game.c srcs/socoban_game_menu.c
 OBJECTS=$(SOURCES:.c=.o)
-HEADERS=-I./includes
+HEADERS=-I./includes -I./libs/includes
+LDFLAGS=./libs/libinput.a
 
 all: build
 
 .c.o:
 	@echo "Compiling"
-	$(CC) $(LDFLAGS) $(HEADERS) -D _SD_SOURCE  $< -o $@
+	$(CC) $(CFLAGS) $(HEADERS) -D _SD_SOURCE  $< -o $@
 
 clean:
 	rm -f $(EXECUTABLE) $(OBJECTS) $(EXECUTABLE_TEST) $(OBJECTS_TEST)
 
 
-rebuild: clean build test
+rebuild: clean build
 
 
 build: $(EXECUTABLE) $(OBJECTS)
 
 $(EXECUTABLE) : $(OBJECTS)
 	@echo "Linking"
-	$(CC) $(OBJECTS) -lcurses -o $@
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 
 
