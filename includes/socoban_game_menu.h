@@ -13,9 +13,11 @@ typedef enum e_socoban_menu {
 } e_socoban_menu;
 
 extern int G_SOCOBAN_MENU_CURRENT_STATE;
+extern e_socoban_menu G_SOCOBAN_MENU_STATE;
 
 // -------------------------------------------------------
 
 void socoban_menu();
+e_socoban_menu socoban_menu_state();
 
 #endif  // SRC_SOCOBAN_GAME_MENU_H_

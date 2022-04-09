@@ -16,8 +16,11 @@ char const *G_SOCOBAN_MENU[MENU_SOCOBAN_END] = {
 };
 
 int G_SOCOBAN_MENU_CURRENT_STATE = MENU_STATE_START;
-void draw_highlighted_element_menu(char const *elemnt_, int is_shift_);
+e_socoban_menu G_SOCOBAN_MENU_STATE = MENU_SOCOBAN_END;
 
+// -------------------------------------------------------
+
+void draw_highlighted_element_menu(char const *elemnt_, int is_shift_);
 void socoban_menu_move();
 char to_up_letter(char ch_);
 char to_down_letter(char ch_);
@@ -26,7 +29,6 @@ char to_down_letter(char ch_);
 
 void socoban_menu() {
 	int is_run = 1;
-
 	while (is_run) {
 		system("clear");
 		for (int i = 0; i < MENU_SOCOBAN_END; ++i) {
@@ -59,9 +61,8 @@ void socoban_menu_move() {
 		} else {
 			G_SOCOBAN_MENU_CURRENT_STATE = MENU_STATE_START;
 		}
-
 	} else if (key == KEY_ENTER) {
-
+		G_SOCOBAN_MENU_STATE = G_SOCOBAN_MENU_CURRENT_STATE;
 	}
 }
 
@@ -102,4 +103,8 @@ char to_down_letter(char ch_) {
 		ch_ += 32;
 	}
 	return (ch_);
+}
+
+e_socoban_menu socoban_menu_state() {
+	return (G_SOCOBAN_MENU_STATE);
 }
