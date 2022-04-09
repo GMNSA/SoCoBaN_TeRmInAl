@@ -4,7 +4,7 @@ EXECUTABLE=a.out
 SOURCES=srcs/main.c srcs/socoban_game.c srcs/socoban_game_menu.c
 OBJECTS=$(SOURCES:.c=.o)
 HEADERS=-I./includes -I./libs/includes
-LDFLAGS=./libs/libinput.a
+LDFLAGS=./libs/libinput.a ./libs/libstring.a
 
 all: build
 
@@ -23,6 +23,7 @@ build: $(EXECUTABLE) $(OBJECTS)
 
 $(EXECUTABLE) : $(OBJECTS)
 	@echo "Linking"
+	make -C libs
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 
 
