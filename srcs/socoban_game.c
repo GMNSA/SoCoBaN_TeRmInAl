@@ -8,6 +8,10 @@
 
 #include "socoban_game_options.h"
 
+e_game_state convert_to_game_state(e_socoban_menu menu_);
+
+// -------------------------------------------------------
+
 e_game_state G_GAME_STATE = GAME_STATE_INIT;
 
 void game() {
@@ -21,7 +25,7 @@ void game() {
 				break;
 			case GAME_STATE_MENU:
 				game_menu();
-				G_GAME_STATE = GAME_STATE_MENU;
+				// G_GAME_STATE = GAME_STATE_MENU;
 				break;
 			case GAME_STATE_PROCESS:
 				game_process();
@@ -60,6 +64,7 @@ void game_init() {
 void game_menu() {
 	printf("MENU\n");
 	socoban_menu();
+	G_GAME_STATE = convert_to_game_state(socoban_menu_state());
 }
 
 // -------------------------------------------------------
@@ -81,5 +86,26 @@ void game_about() {
 }
 
 void game_exit() {
+	system("clear");
 	printf("EXIT\n");
+}
+
+// -------------------------------------------------------
+
+e_game_state convert_to_game_state(e_socoban_menu menu_) {
+	e_game_state result = GAME_STATE_MENU;
+	if (menu_ == MENU_STATE_START) {
+		result = GAME_STATE_PROCESS;
+	} else if (menu_ == MENU_STATE_LEVEL) {
+		result = GAME_STATE_LEVEL;
+	} else if (menu_ == MENU_STATE_SCORES) {
+		result = GAME_STATE_SCORES;
+	} else if (menu_ == MENU_STATE_ABOUT) {
+		result = GAME_STATE_ABOUT;
+	} else if (menu_ == MENU_STATE_EXIT) {
+		result = GAME_STATE_EXIT;
+	} else {
+		result = GAME_STATE_MENU;
+	}
+	return (result);
 }

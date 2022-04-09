@@ -43,6 +43,9 @@ void socoban_menu() {
 			}
 		}
 		socoban_menu_move();
+		if (G_SOCOBAN_MENU_STATE != MENU_SOCOBAN_END) {
+			is_run = 0;
+		}
 		usleep(SOCOBAN_DEFAULT_SPEED_MENU);
 	}
 }
