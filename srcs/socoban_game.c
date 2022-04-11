@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "f_input.h"
 #include "socoban_game_menu.h"
-
 #include "socoban_game_options.h"
 
 e_game_state convert_to_game_state(e_socoban_menu menu_);
@@ -25,27 +25,22 @@ void game() {
 				break;
 			case GAME_STATE_MENU:
 				game_menu();
-				// G_GAME_STATE = GAME_STATE_MENU;
+				G_GAME_STATE = convert_to_game_state(socoban_menu_state());
 				break;
 			case GAME_STATE_PROCESS:
 				game_process();
-				G_GAME_STATE = GAME_STATE_PROCESS;
 				break;
 			case GAME_STATE_LEVEL:
 				game_level();
-				G_GAME_STATE = GAME_STATE_LEVEL;
 				break;
 			case GAME_STATE_SCORES:
 				game_scores();
-				G_GAME_STATE = GAME_STATE_SCORES;
 				break;
 			case GAME_STATE_ABOUT:
 				game_about();
-				G_GAME_STATE = GAME_STATE_ABOUT;
 				break;
 			case GAME_STATE_EXIT:
 				game_exit();
-				G_GAME_STATE = GAME_STATE_EXIT;
 				is_run = 0;
 				break;
 			default:
@@ -64,25 +59,40 @@ void game_init() {
 void game_menu() {
 	printf("MENU\n");
 	socoban_menu();
-	G_GAME_STATE = convert_to_game_state(socoban_menu_state());
 }
 
 // -------------------------------------------------------
 
 void game_process() {
 	printf("PROCESS\n");
+
+	if (key_input() == KEY_ESCAPE) {
+		G_GAME_STATE = GAME_STATE_INIT;
+	}
 }
 
 void game_level() {
 	printf("LEVEL\n");
+
+	if (key_input() == KEY_ESCAPE) {
+		G_GAME_STATE = GAME_STATE_INIT;
+	}
 }
 
 void game_scores() {
 	printf("SCORES\n");
+
+	if (key_input() == KEY_ESCAPE) {
+		G_GAME_STATE = GAME_STATE_MENU;
+	}
 }
 
 void game_about() {
 	printf("ABOUT\n");
+
+	if (key_input() == KEY_ESCAPE) {
+		G_GAME_STATE = GAME_STATE_MENU;
+	}
 }
 
 void game_exit() {

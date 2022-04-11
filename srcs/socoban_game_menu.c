@@ -21,7 +21,7 @@ e_socoban_menu G_SOCOBAN_MENU_STATE = MENU_SOCOBAN_END;
 // -------------------------------------------------------
 
 void draw_highlighted_element_menu(char const *elemnt_, int is_shift_);
-void socoban_menu_move();
+void socoban_menu_move(int *is_run_);
 char to_up_letter(char ch_);
 char to_down_letter(char ch_);
 
@@ -42,15 +42,12 @@ void socoban_menu() {
 				}
 			}
 		}
-		socoban_menu_move();
-		if (G_SOCOBAN_MENU_STATE != MENU_SOCOBAN_END) {
-			is_run = 0;
-		}
+		socoban_menu_move(&is_run);
 		usleep(SOCOBAN_DEFAULT_SPEED_MENU);
 	}
 }
 
-void socoban_menu_move() {
+void socoban_menu_move(int *is_run_) {
 	e_key_code key = key_input();
 	if (key == KEY_UP) {
 		if (G_SOCOBAN_MENU_CURRENT_STATE > MENU_STATE_START) {
@@ -66,6 +63,7 @@ void socoban_menu_move() {
 		}
 	} else if (key == KEY_ENTER) {
 		G_SOCOBAN_MENU_STATE = G_SOCOBAN_MENU_CURRENT_STATE;
+		*is_run_ = 0;
 	}
 }
 
