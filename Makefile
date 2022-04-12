@@ -22,6 +22,4 @@ build: $(EXECUTABLE) $(OBJECTS)
 
 $(EXECUTABLE) : $(OBJECTS)
 	@echo "Linking"
-	$(CC) $(OBJECTS) -lcurses -o $@
-
-
+	$(CC) $(OBJECTS) -o $@
