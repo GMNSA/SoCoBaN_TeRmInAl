@@ -40,9 +40,9 @@ char *f_strdup(const char *s_);
  * @param s2_ (char const *) string two
  *
  * @return      integer indicating the result of the comparison, as follows: 
- * 				       • 0, if the s1 and s2 are equal;
-				       • a negative value if s1 is less than s2;
-       				   • a positive value if s1 is greater than s2.
+ * 				       	• 0, if the s1 and s2 are equal;
+ * 				       	• a negative value if s1 is less than s2;
+ * 						• a positive value if s1 is greater than s2.
  */
 int f_strcmp(const char *s1_, const char *s2_);
 
