@@ -14,8 +14,16 @@ int main(void)
 void test_xml() {
 	s_xml_document doc;
 	if (xml_document_load(&doc, "data/test.xml")) {
-		// printf("%s\n", doc.root);
+		while (doc.root) {
+			output_xml_node(doc.root);
+			doc.root = doc.root->parent;
+		}
 		xml_document_free(&doc);
 	}
+	printf("\n------------\n");
 	printf("TEST xml OK\n");
+
 }
+// 1. size file text
+// 2. create buff data form file
+// 3. 
