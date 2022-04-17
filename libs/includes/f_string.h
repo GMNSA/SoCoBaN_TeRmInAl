@@ -1,8 +1,6 @@
 #ifndef SRC_F_STRING_H_
 #define SRC_F_STRING_H_
 
-// strcmp
-
 /**
  * @brief 	f_strlen - calculate the length of a string
  * 				The f_strlen() function calculates the length of the string
@@ -46,5 +44,16 @@ char *f_strdup(const char *s_);
  */
 int f_strcmp(const char *s1_, const char *s2_);
 
+// -------------------------------------------------------
+
+/**
+ * @brief  	f_atoi() function converts the initial portion of the string pointed 
+ * 						to by nptr to int.
+ *
+ * @param nptr (char *) string
+ *
+ * @return 	The converted value or 0 on error.
+ */
+int f_atoi(const char *nptr);
 
 #endif // SRC_F_STRING_H_

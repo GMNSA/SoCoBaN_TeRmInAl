@@ -5,6 +5,7 @@
 void test_strlen();
 void test_strdup();
 void test_strcmp();
+void test_atoi();
 
 int main(void)
 {
@@ -20,10 +21,15 @@ int main(void)
 	test_strdup();
 #endif	// _TEST_2
 
+#ifdef _TEST_3
+	test_atoi();
+#endif	// _TEST_2
+
 #ifdef _TEST_
 	test_strlen();
 	test_strcmp();
 	test_strdup();
+	test_atoi();
 #endif 	//_TEST_
 	return 0;
 }
@@ -216,5 +222,88 @@ void test_strcmp() {
 		printf("TEST f_strcmp OK ===========>\n");
 	} else {
 		printf("TEST f_strcmp FAIL ===========>\n");
+	}
+}
+
+// -------------------------------------------------------
+
+void test_atoi() {
+	char *num = "-9 3loo";
+	int is_ok = 1;
+
+	if (f_atoi(num) == -9) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	num = " -9a3loo";
+	if (f_atoi(num) == -9) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	num = " ";
+	if (f_atoi(num) == 0) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	num = " +33b 99";
+	if (f_atoi(num) == 33) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	num = " +0";
+	if (f_atoi(num) == 0) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	num = " -0";
+	if (f_atoi(num) == 0) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	num = " 	-122";
+	if (f_atoi(num) == -122) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	num = " 	+a122";
+	if (f_atoi(num) == 0) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+	num = " 	\n122";
+	if (f_atoi(num) == 0) {
+		printf("OK\n");
+	} else {
+		printf("FAIL [line] - %d\n", __LINE__);
+		is_ok = 0;
+	}
+
+	if (is_ok) {
+		printf("TEST f_atoi OK ===========>\n");
+	} else {
+		printf("TEST f_atoi FAIL ===========>\n");
 	}
 }
